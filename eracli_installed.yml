@@ -1,0 +1,54 @@
+---
+- name: Install Eraraid on Alt 8 SP
+  hosts: servers
+  remote_user: root
+  gather_facts: no
+
+  tasks:
+    - name: Update & Upgrade (1/7)
+      apt_rpm:
+        update_cache: true
+        dist_upgrade: true
+            
+    - name: Upgrade kernel (2/7)
+      apt_rpm:
+        update_cache: true
+        dist_upgrade: true
+        update_kernel: true
+        
+    - name: Install curl nvme-cli (3/7)     
+      ansible.builtin.shell:
+        cmd: apt-get install curl nvme-cli -y
+
+    - name: Copy eracli repo file to source.list dir (4/7)
+      copy:
+        src: sources.list.d/
+        dest: /etc/apt/sources.list.d
+
+    - name: Update & Upgrade (5/7)
+      apt_rpm:
+        update_cache: true
+        dist_upgrade: true
+
+    - name: Install eraraid pkg (6/7)
+      apt_rpm:
+        update_cache: true
+        pkg:
+          - eraraid-release
+    
+    - name: Reboot after install (7/7)
+      ansible.builtin.reboot:
+    
+    - name: check if eracli is installed
+      shell: lsmod | grep era
+      register: era_installed
+      ignore_errors: True
+      check_mode: False
+      changed_when: False
+
+    - name: print
+      debug:
+        msg: "eracli is installed"
+      when: era_installed.rc == 0 
+
+...

@@ -1,0 +1,12 @@
+# update.altsp.su (IVK, Moscow)
+
+# ALT Certified 8
+#rpm [cert8] ftp://update.altsp.su/pub/distributions/ALTLinux CF2/branch/x86_64 classic
+#rpm [cert8] ftp://update.altsp.su/pub/distributions/ALTLinux CF2/branch/x86_64-i586 classic
+#rpm [cert8] ftp://update.altsp.su/pub/distributions/ALTLinux CF2/branch/noarch classic
+
+rpm [cert8] http://update.altsp.su/pub/distributions/ALTLinux CF2/branch/x86_64 classic
+rpm [cert8] http://update.altsp.su/pub/distributions/ALTLinux CF2/branch/x86_64-i586 classic
+rpm [cert8] http://update.altsp.su/pub/distributions/ALTLinux CF2/branch/noarch classic
+
+#rpm http://update.altsp.su/ c9f2/branch/x86_64 classic
